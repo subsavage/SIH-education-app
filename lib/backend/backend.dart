@@ -1,11 +1,18 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<Map<String, dynamic>> fetchData() async {
-  final response = await http.get(Uri.parse('http://localhost:8000/ask/'));
+Future<Map<String, dynamic>> fetchData(String prompt) async {
+  var url = 'http://10.0.0.22:8000/ask/';
+  print(prompt);
+  final response = await http.post(
+    Uri.parse(url),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({'prompt': prompt}),
+  );
+
   if (response.statusCode == 200) {
-    return json.decode(response.body);
+    return jsonDecode(response.body);
   } else {
-    throw Exception('Failed to fetch data');
+    return {'error': 'Failed to fetch data'};
   }
 }

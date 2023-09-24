@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:eduapp/input.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Widget learningBlock() {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        width: MediaQuery.sizeOf(context).width * 0.95,
+        height: 80,
+        decoration: BoxDecoration(
+            border: Border.all(
+          color: Colors.black,
+        )),
+        child: const Center(
+          child: Text("Learning Flutter"),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,9 +53,11 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Column(children: [
-          Center(
-            child: Text("Hello"),
-          )
+          learningBlock(),
+          const SizedBox(
+            height: 15,
+          ),
+          learningBlock(),
         ]),
       ),
     );
